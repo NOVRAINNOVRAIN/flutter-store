@@ -172,8 +172,7 @@ class _GoodsListPageState extends State<GoodsListPage>
   Widget buildSubCategoryItem(Subcategory subcategory) {
     return InkWell(
       onTap: () {
-        print("${currentSubCategory}---${subcategory.subcid}");
-        if (subcategory.subcid != currentSubCategory) {
+        if (subcategory.subcid != int.parse(currentSubCategory)) {
           setState(() {
             currentSubCategory = subcategory.subcid.toString();
             currentMainCategory = "";
