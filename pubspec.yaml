@@ -23,7 +23,7 @@ dependencies:
   fluro: ^1.7.7 # 路由
   flutter_easyrefresh: ^2.1.6   # 上拉加载更多
   flutter_custom_dialog: ^1.0.19  # 弹窗
-  pull_to_refresh: ^1.5.7 # 上拉加载
+  pull_to_refresh: ^1.6.2 # 上拉加载
   fbutton: ^1.0.4
   fradio: ^1.0.1
   fsuper: ^0.1.5
