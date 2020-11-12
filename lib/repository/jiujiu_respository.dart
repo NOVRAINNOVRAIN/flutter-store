@@ -31,7 +31,6 @@ class JiuJiuRepository extends LoadingMoreBase<NineGoodsItem> {
 
   @override
   Future<bool> loadData([bool isloadMoreAction = false]) async {
-    print("进来了;${cid}");
     bool isSuccess = false; // 是否加载成功
     await getNineGoods({"pageId": pageIndex, "nineCid": cid}).then((res) {
       Result result = ResultUtils.format(res);

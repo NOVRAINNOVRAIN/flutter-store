@@ -37,11 +37,7 @@ class IndexHome extends StatefulWidget {
   _IndexHomeState createState() => _IndexHomeState();
 }
 
-class _IndexHomeState extends State<IndexHome>
-    with
-        AutomaticKeepAliveClientMixin,
-        TickerProviderStateMixin,
-        AfterLayoutMixin<IndexHome> {
+class _IndexHomeState extends State<IndexHome> with AutomaticKeepAliveClientMixin, TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
 //   状态管理
   CarouselProviderModal carouselProviderModal;
   DtkIndexGoodsModal dtkIndexGoodsModal;
@@ -77,19 +73,17 @@ class _IndexHomeState extends State<IndexHome>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<CarouselProviderModal, DtkIndexGoodsModal,
-        CategoryProvider>(
-      builder: (content, cpm, digm, categoryProvider, _) =>
-          PullToRefreshNotification(
-              pullBackOnRefresh: false,
-              maxDragOffset: 80.0,
-              armedDragUpCancel: false,
-              onRefresh: () async {
-                await indexGoodsRepository.refresh(true);
-                return true;
-              },
-              child: _buildIndexBody(cpm)),
-          // child: IndexLoadingSkeletonPage(),)
+    return Consumer3<CarouselProviderModal, DtkIndexGoodsModal, CategoryProvider>(
+      builder: (content, cpm, digm, categoryProvider, _) => PullToRefreshNotification(
+          pullBackOnRefresh: false,
+          maxDragOffset: 80.0,
+          armedDragUpCancel: false,
+          onRefresh: () async {
+            await indexGoodsRepository.refresh(true);
+            return true;
+          },
+          child: _buildIndexBody(cpm)),
+      // child: IndexLoadingSkeletonPage(),)
     );
   }
 
@@ -110,10 +104,7 @@ class _IndexHomeState extends State<IndexHome>
         isScrollable: true,
         onTap: (index) {
           if (index > 0) {
-            NavigatorUtil.gotoGoodslistPage(context,
-                showCates: "1",
-                cids: categorys[index - 1].cid.toString(),
-                title: categorys[index - 1].cname);
+            NavigatorUtil.gotoGoodslistPage(context, showCates: "1", cids: categorys[index - 1].cid.toString(), title: categorys[index - 1].cname);
           }
         },
         indicator: RoundUnderlineTabIndicator(
@@ -130,9 +121,9 @@ class _IndexHomeState extends State<IndexHome>
 
   // 轮播图股架屏
   Widget _buildGJP() {
-    if(carouselProviderModal.carousels.isEmpty && carouselISLoaded){
+    if (carouselProviderModal.carousels.isEmpty && carouselISLoaded) {
       return Container(
-        height:480.h,
+        height: 480.h,
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.symmetric(horizontal: 10),
         alignment: Alignment.center,
@@ -144,15 +135,24 @@ class _IndexHomeState extends State<IndexHome>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.warning,color: Colors.blue,),SizedBox(width: 5,),
-            Text("请到后台设置轮播数据!",style: TextStyle(color: Colors.blue),),
+            Icon(
+              Icons.warning,
+              color: Colors.blue,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              "请到后台设置轮播数据!",
+              style: TextStyle(color: Colors.blue),
+            ),
           ],
         ),
       );
     }
     return Shimmer.fromColors(
         child: Container(
-          height:480.h,
+          height: 480.h,
           margin: EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -183,16 +183,12 @@ class _IndexHomeState extends State<IndexHome>
   // 首页商品列表
   Widget _buildGoodsList() {
     return LoadingMoreSliverList(SliverListConfig<GoodsItem>(
-      extendedListDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: ScreenUtil().setHeight(30),
-          mainAxisSpacing: ScreenUtil().setWidth(30)),
+      extendedListDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: ScreenUtil().setHeight(30), mainAxisSpacing: ScreenUtil().setWidth(30)),
       itemBuilder: (context, item, index) {
         return WaterfallGoodsCard(item);
       },
       sourceList: indexGoodsRepository,
-      padding: EdgeInsets.only(
-          left: ScreenUtil().setWidth(50), right: ScreenUtil().setWidth(50)),
+      padding: EdgeInsets.only(left: ScreenUtil().setWidth(50), right: ScreenUtil().setWidth(50)),
 //      lastChildLayoutType: LastChildLayoutType.foot,
       indicatorBuilder: (context, state) {
         return LoadingMoreListCostumIndicator(state, isSliver: true);
@@ -215,10 +211,7 @@ class _IndexHomeState extends State<IndexHome>
     final carouselProviderModal = Provider.of<CarouselProviderModal>(context);
     final dtkIndexGoodsModal = Provider.of<DtkIndexGoodsModal>(context);
     final categoryProvider = Provider.of<CategoryProvider>(context);
-    await loadDatas(
-        carouselProviderModal: carouselProviderModal,
-        dtkIndexGoodsModal: dtkIndexGoodsModal,
-        categoryProvider: categoryProvider);
+    await loadDatas(carouselProviderModal: carouselProviderModal, dtkIndexGoodsModal: dtkIndexGoodsModal, categoryProvider: categoryProvider);
   }
 
   @override
@@ -231,10 +224,7 @@ class _IndexHomeState extends State<IndexHome>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
-  Future<void> loadDatas(
-      {CarouselProviderModal carouselProviderModal,
-      DtkIndexGoodsModal dtkIndexGoodsModal,
-      CategoryProvider categoryProvider}) async {
+  Future<void> loadDatas({CarouselProviderModal carouselProviderModal, DtkIndexGoodsModal dtkIndexGoodsModal, CategoryProvider categoryProvider}) async {
     if (carouselProviderModal != this.carouselProviderModal) {
       this.carouselProviderModal = carouselProviderModal;
       await carouselProviderModal.getCarousel();
@@ -251,8 +241,7 @@ class _IndexHomeState extends State<IndexHome>
       await categoryProvider.loadDtkCategoryDatas(context);
       setState(() {
         this.categorys = categoryProvider.categorys;
-        tabController =
-            TabController(length: this.categorys.length + 1, vsync: this);
+        tabController = TabController(length: this.categorys.length + 1, vsync: this);
         setState(() {
           categortListIsLoaded = true;
         });
@@ -286,15 +275,12 @@ class _IndexHomeState extends State<IndexHome>
 
         SliverToBoxAdapter(
           child: Container(
-            padding: EdgeInsets.only(
-                left: ScreenUtil().setWidth(50),
-                right: ScreenUtil().setWidth(50)),
+            padding: EdgeInsets.only(left: ScreenUtil().setWidth(50), right: ScreenUtil().setWidth(50)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 MenuIcon(0, onTap: () {
-                  NavigatorUtil.gotoHaodankuGoodsDetailPage(
-                      context, "619590382526");
+                  NavigatorUtil.gotoHaodankuGoodsDetailPage(context, "619590382526");
                 }),
                 MenuIcon(
                   1,
@@ -330,19 +316,12 @@ class _IndexHomeState extends State<IndexHome>
                 key: _titleKey,
                 duration: Duration(milliseconds: 300),
                 decoration: BoxDecoration(
-                  color: _titleIsInTop ? Colors.white : Color.fromRGBO(235,235,235, 1),
-                  boxShadow:_titleIsInTop ? [
-                    BoxShadow(color: Colors.grey[200],blurRadius: 1.0,spreadRadius: 1.0,offset: Offset(1,1))
-                  ]:[]
-                ),
-                child: CustomSelectToolbar(
-                  items: [
-                    SelectMenu(title: "佛系推荐", subTitle: '发现好物'),
-                    SelectMenu(title: "精选", subTitle: '猜你喜欢'),
-                  ],
-                  select: 0,
-                  hideSubTitle:_titleIsInTop
-                ),
+                    color: _titleIsInTop ? Colors.white : Color.fromRGBO(235, 235, 235, 1),
+                    boxShadow: _titleIsInTop ? [BoxShadow(color: Colors.grey[200], blurRadius: 1.0, spreadRadius: 1.0, offset: Offset(1, 1))] : []),
+                child: CustomSelectToolbar(items: [
+                  SelectMenu(title: "佛系推荐", subTitle: '发现好物'),
+                  SelectMenu(title: "精选", subTitle: '猜你喜欢'),
+                ], select: 0, hideSubTitle: _titleIsInTop),
               )),
         ),
 
@@ -382,9 +361,7 @@ class _IndexHomeState extends State<IndexHome>
   }
 
   Widget _buildCategoryTabbar() {
-    return carouselISLoaded && categortListIsLoaded
-        ? _tabs()
-        : _buildTabShimmer();
+    return carouselISLoaded && categortListIsLoaded ? _tabs() : _buildTabShimmer();
   }
 
   Widget _buildAppbar() {
@@ -392,24 +369,22 @@ class _IndexHomeState extends State<IndexHome>
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Container(
-        height: ScreenUtil().setHeight(140),
+        height: 140.h,
         child: TextField(
           textAlignVertical: TextAlignVertical.center,
           textAlign: TextAlign.left,
           decoration: InputDecoration(
-            hintText: '输入商品名或者宝贝标题搜索',
-            border: InputBorder.none,
-            alignLabelWithHint: true,
-            filled: true,
-            fillColor: Colors.white,
-            suffixIcon: Icon(
-              Icons.search,
-              color: Colors.grey,
-            ),
-            hintStyle: TextStyle(
-              height: 1,
-            ),
-          ),
+              hintText: '输入商品名或者宝贝标题搜索',
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0), borderSide: BorderSide.none),
+              alignLabelWithHint: true,
+              filled: true,
+              fillColor: Colors.white,
+              suffixIcon: Icon(
+                Icons.search,
+                color: Colors.grey,
+              ),
+              hintStyle: TextStyle(height: 1.5),
+              contentPadding: EdgeInsets.only(top: 30.h, left: 40.w)),
           style: TextStyle(height: 1, color: Colors.black),
         ),
       ),
@@ -450,24 +425,22 @@ class _IndexHomeState extends State<IndexHome>
 
   // 监听主滑动距离
   void _addMainScrollListening() {
-    double topAppbarHei =
-        330.h + MediaQueryData.fromWindow(window).padding.top; // 顶部搜索框和选项卡高度
+    double topAppbarHei = 330.h + MediaQueryData.fromWindow(window).padding.top; // 顶部搜索框和选项卡高度
     _mainScrollController.addListener(() {
       double titleTopHei = _titleLocationHandler();
       if (titleTopHei <= topAppbarHei) {
-        if(!_titleIsInTop){
+        if (!_titleIsInTop) {
           setState(() {
             _titleIsInTop = true;
           });
         }
-      }else{
-        if(_titleIsInTop){
+      } else {
+        if (_titleIsInTop) {
           setState(() {
             _titleIsInTop = false;
           });
         }
       }
-
     });
   }
 

@@ -20,7 +20,6 @@ class HeaderIndex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("${user}");
     return Container(
       height: ScreenUtil().setHeight(containerHeight),
       child: Stack(

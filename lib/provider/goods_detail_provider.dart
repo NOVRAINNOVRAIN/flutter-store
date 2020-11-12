@@ -19,22 +19,18 @@ class GoodsDetailProvider with ChangeNotifier {
   getGoodsDetailInfo(String goods_id) async {
     await getGoodsInfo({'id': goods_id}).then((res) {
       Result resultObj = ResultUtils.format(res);
-      print(resultObj.data);
       if (resultObj.code == 200) {
         var dtkCode = json.decode(resultObj.data.toString())["code"];
         if (dtkCode == 0) {
           var _goodInfo =
               GoodsInfo.fromJson(json.decode(resultObj.data.toString()));
           goodInfo = _goodInfo.data;
-          print(goodInfo.detailPics);
           have = true;
           notifyListeners();
         } else {
           var dtkMsg = json.decode(resultObj.data.toString())["msg"];
-          print('${dtkMsg}');
         }
       } else {
-        print("${resultObj.msg}");
       }
     });
   }
@@ -102,9 +98,7 @@ class GoodsDetailProvider with ChangeNotifier {
         if (goodInfo != null) {
         await haveGoodsFavorite({'goodsId': goodInfo.id, "userId": user.id})
               .then((res) {
-            print("${res}");
             Result result = ResultUtils.format(res);
-            print('${res}');
             if (result.code == 200) {
               this.isHaveFav = int.parse(result.data);
               notifyListeners();
