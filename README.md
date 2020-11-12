@@ -1,6 +1,6 @@
 
 [![qq群 1102781545](https://badgen.net/badge/QQ%E7%BE%A4/1102781545/pink)](https://jq.qq.com/?_wv=1027&k=gxaTJ7i5) ![典典的小卖部](https://badgen.net/badge/%E5%85%B8%E5%85%B8%E7%9A%84%E5%B0%8F%E5%8D%96%E9%83%A8/v1.0.0+1/red)
-![start](https://badgen.net/github/stars/mdddj/flutter_simple_shop)![fork](https://badgen.net/github/forks/mdddj/flutter_simple_shop)
+![start](https://badgen.net/github/stars/mdddj/flutter_simple_shop) ![fork](https://badgen.net/github/forks/mdddj/flutter_simple_shop)
 # 关于
 这是我入门flutter写的项目,一边学一边写,肯定有很多不合理的地方,还望各位大佬勿喷!谢谢
 有问题也可以提交iss,或者加flutter学习群提问,看到都会回复的,群号1102781545
