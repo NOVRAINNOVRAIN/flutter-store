@@ -1,3 +1,5 @@
+
+[![qq群 1102781545](https://badgen.net/badge/QQ%E7%BE%A4/1102781545/pink)](https://jq.qq.com/?_wv=1027&k=gxaTJ7i5)
 # 关于
 这是我入门flutter写的项目,一边学一边写,肯定有很多不合理的地方,还望各位大佬勿喷!谢谢
 有问题也可以提交iss,或者加flutter学习群提问,看到都会回复的,群号1102781545
