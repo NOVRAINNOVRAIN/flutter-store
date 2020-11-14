@@ -259,6 +259,7 @@ class _AppState extends State<App> {
                           ? Color.fromRGBO(253, 87, 92, 1.0)
                           : Color.fromRGBO(102, 102, 102, 1.0)),
                 ),
+
                 icon: _currentIndex == 2
                     ? Image.asset(
                         'assets/nav/fenlei.png',

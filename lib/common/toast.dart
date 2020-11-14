@@ -52,7 +52,7 @@ void showLoading(context, [String text]) {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     text,
-                    style: Theme.of(context).textTheme.body2,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ),
               ],

@@ -10,10 +10,10 @@ import '../modals/user_model.dart';
 import '../modals/favorites_model.dart';
 
 class UserProvider with ChangeNotifier {
-  User user = null; // 用户信息,包含token
+  User user; // 用户信息,包含token
 
   //------------- 用户收藏商品信息
-  PageInfo pageInfo = null; // 用户收藏商品信息
+  PageInfo pageInfo; // 用户收藏商品信息
   List<Good> goods = []; // 商品列表
   int page = 1; // 第几页
   bool isEditFavoriteIng = false; //是否在编辑收藏商品
@@ -106,13 +106,13 @@ class UserProvider with ChangeNotifier {
   }
 
   // 获取用户收藏的下一页商品列表
-  void loadNextPageUserFavoriteGoodsListFun() async {
+  Future<void> loadNextPageUserFavoriteGoodsListFun() async {
     this.page = page + 1;
     this.loadUserFavoriteGoodsListFun(this.page);
   }
 
   // 获取用户收藏的商品列表
-  void loadUserFavoriteGoodsListFun(int pageId) async {
+  Future<void> loadUserFavoriteGoodsListFun(int pageId) async {
     // 判断用户是否已经登录
     await UserUtil.loadUserInfo().then((user) async {
       if (user != null) {

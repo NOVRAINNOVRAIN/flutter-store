@@ -17,7 +17,7 @@ class _LoadAnimationState extends State<LoadAnimation>
   @override
   void initState() {
     controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 3), vsync: this,
     )..repeat();
     super.initState();
   }

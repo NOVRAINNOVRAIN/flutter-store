@@ -11,6 +11,6 @@ class LoadingWidget extends StatelessWidget {
       child: Center(
         child: Image.asset("assets/images/loading.gif"),
       ),
-    );;
+    );
   }
 }

@@ -19,7 +19,7 @@ import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
       refreshWiget = info.refreshWiget;
     }
 
-    Widget child = null;
+    Widget child;
     if (mode == RefreshIndicatorMode.error) {
       child = GestureDetector(
           onTap: () {

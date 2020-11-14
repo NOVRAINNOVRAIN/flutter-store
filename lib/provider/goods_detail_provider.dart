@@ -91,7 +91,7 @@ class GoodsDetailProvider with ChangeNotifier {
   }
 
   // 判断收藏按钮显示
-  void haveFav() async {
+  Future<void> haveFav() async {
     // 判断用户是否已经登录
     await UserUtil.loadUserInfo().then((user) async {
       if (user != null) {

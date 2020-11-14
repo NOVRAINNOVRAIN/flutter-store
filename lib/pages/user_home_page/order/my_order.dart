@@ -81,7 +81,7 @@ class _MyOrderHomePageState extends State<MyOrderHomePage> {
                                 )
                               ],
                             ),
-                            Text("提交时间:${createTimeStr}"),
+                            Text("提交时间:$createTimeStr"),
                           ],
                         ),
                       );

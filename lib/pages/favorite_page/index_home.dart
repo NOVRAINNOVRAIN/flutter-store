@@ -82,8 +82,7 @@ class _IndexState extends State<FavoriteIndexHome> {
                       height: ScreenUtil().setHeight(200),
                       child: Container(
                         margin: EdgeInsets.all(5),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
                             color: Color.fromRGBO(255, 255, 255, 0.92),
                             borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -96,15 +95,16 @@ class _IndexState extends State<FavoriteIndexHome> {
                               child: Row(
                                 children: <Widget>[
                                   Checkbox(
-                                    value:
-                                        userProvider.editFavoriteIds.length ==
-                                            userProvider.goods.length,
+                                    value: userProvider.editFavoriteIds.length ==
+                                        userProvider.goods.length,
                                     onChanged: (v) {
                                       userProvider.selectAll(v);
                                     },
                                   ),
                                   Text(userProvider.editFavoriteIds.length ==
-                                      userProvider.goods.length?"取消全选":"全选")
+                                          userProvider.goods.length
+                                      ? "取消全选"
+                                      : "全选")
                                 ],
                               ),
                             ),
@@ -112,26 +112,18 @@ class _IndexState extends State<FavoriteIndexHome> {
                             Expanded(
                               child: Container(
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
                                     FSuper(
-                                      text:"已选 ",
+                                      text: "已选 ",
                                       textColor: Colors.grey,
                                       spans: [
                                         TextSpan(
-                                          text: userProvider.editFavoriteIds.length.toString(),
-                                          style: TextStyle(
-                                            fontSize: ScreenUtil().setSp(70),
-                                            color: Colors.black
-                                          )
-                                        ),
-                                        TextSpan(
-                                          text: " 项",
+                                            text: userProvider.editFavoriteIds.length.toString(),
                                             style: TextStyle(
-                                                color: Colors.grey
-                                            )
-                                        )
+                                                fontSize: ScreenUtil().setSp(70),
+                                                color: Colors.black)),
+                                        TextSpan(text: " 项", style: TextStyle(color: Colors.grey))
                                       ],
                                     ),
                                     FButton(
@@ -141,50 +133,33 @@ class _IndexState extends State<FavoriteIndexHome> {
                                       textColor: Colors.white,
                                       padding: EdgeInsets.zero,
                                       color: Colors.pinkAccent,
-                                      onPressed: userProvider
-                                                  .editFavoriteIds.length !=
-                                              0
+                                      onPressed: userProvider.editFavoriteIds.length != 0
                                           ? () {
-                                              if (userProvider
-                                                      .editFavoriteIds.length !=
-                                                  0) {
+                                              if (userProvider.editFavoriteIds.length != 0) {
                                                 showDialog(
                                                     context: context,
-                                                    builder: (context) =>
-                                                        AlertDialog(
+                                                    builder: (context) => AlertDialog(
                                                           title: Text('提示'),
-                                                          content:
-                                                              Text(('确定删除吗')),
+                                                          content: Text(('确定删除吗')),
                                                           actions: <Widget>[
                                                             new FlatButton(
-                                                              child: new Text(
-                                                                  "取消"),
+                                                              child: new Text("取消"),
                                                               onPressed: () {
-                                                                Navigator.pop(
-                                                                    context);
+                                                                Navigator.pop(context);
                                                               },
                                                             ),
                                                             new FlatButton(
-                                                              child: new Text(
-                                                                  "确定"),
-                                                              onPressed:
-                                                                  () async {
-                                                                await userProvider
-                                                                    .editFavoriteIds
-                                                                    .forEach(
-                                                                        (id) async {
+                                                              child: new Text("确定"),
+                                                              onPressed: () async {
+                                                                userProvider.editFavoriteIds
+                                                                    .forEach((id) async {
                                                                   await goodsDetailProvider
                                                                       .removeGoodsFavoriteFun(
-                                                                          goodsId:
-                                                                              id);
+                                                                          goodsId: id);
                                                                 });
-                                                                userProvider
-                                                                    .removeFavoriteOk();
-                                                                SystemToast
-                                                                    .show(
-                                                                        "删除成功");
-                                                                Navigator.pop(
-                                                                    context);
+                                                                userProvider.removeFavoriteOk();
+                                                                SystemToast.show("删除成功");
+                                                                Navigator.pop(context);
                                                               },
                                                             ),
                                                           ],
@@ -198,8 +173,7 @@ class _IndexState extends State<FavoriteIndexHome> {
                                     ),
                                     InkWell(
                                         onTap: () {
-                                          userProvider
-                                              .editorIconClickHandleFun(false);
+                                          userProvider.editorIconClickHandleFun(false);
                                         },
                                         child: Icon(Icons.clear))
                                   ],
@@ -218,7 +192,7 @@ class _IndexState extends State<FavoriteIndexHome> {
     );
   }
 
-  void r() async {
+  Future<void> r() async {
     await this.userProvider.loadUserFavoriteGoodsListFun(1);
     rc.refreshCompleted();
     rc.footerMode.value = LoadStatus.idle;
@@ -237,8 +211,7 @@ class _IndexState extends State<FavoriteIndexHome> {
   @override
   void didChangeDependencies() {
     UserProvider userProvider = Provider.of<UserProvider>(context);
-    GoodsDetailProvider goodsDetailProvider =
-        Provider.of<GoodsDetailProvider>(context);
+    GoodsDetailProvider goodsDetailProvider = Provider.of<GoodsDetailProvider>(context);
     if (this.userProvider != userProvider) {
       this.userProvider = userProvider;
     }

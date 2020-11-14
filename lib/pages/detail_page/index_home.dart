@@ -428,10 +428,8 @@ class _DetailIndexState extends State<DetailIndex> {
     GoodsDetail goodsItem = goodsDetailProvider.goodInfo;
     double rate = goodsItem.commissionRate;
     double jiner = goodsItem.actualPrice * (rate / 100); // 实际获得金额
-    print("可获得佣金:${jiner}");
     // 给用户的佣金
     double userJiner = jiner * 0.7;
-    print("用户可获得佣金${userJiner}");
     return userJiner;
   }
 

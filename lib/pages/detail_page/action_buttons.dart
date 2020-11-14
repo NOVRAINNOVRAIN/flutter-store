@@ -73,7 +73,7 @@ class ActionButtons extends StatelessWidget {
                             // 添加收藏
                             await goodsDetailProvider.addGoodsFavoriteFun();
                             // 刷新收藏列表
-                            await userProvider.resetFavoriteData();
+                            userProvider.resetFavoriteData();
                             await userProvider.loadUserFavoriteGoodsListFun(1);
                           },
                           child: FSuper(
@@ -92,7 +92,7 @@ class ActionButtons extends StatelessWidget {
                       : InkWell(
                           onTap: () async {
                             await goodsDetailProvider.removeGoodsFavoriteFun();
-                            await userProvider.resetFavoriteData();
+                            userProvider.resetFavoriteData();
                             await userProvider.loadUserFavoriteGoodsListFun(1);
                           },
                           child: FSuper(
@@ -178,7 +178,7 @@ class ActionButtons extends StatelessWidget {
                       // 添加收藏
                       await goodsDetailProvider.addGoodsFavoriteFun();
                       // 刷新收藏列表
-                      await userProvider.resetFavoriteData();
+                      userProvider.resetFavoriteData();
                       await userProvider.loadUserFavoriteGoodsListFun(1);
                     },
                     child: Container(
@@ -193,7 +193,7 @@ class ActionButtons extends StatelessWidget {
                 : InkWell(
                     onTap: () async {
                       await goodsDetailProvider.removeGoodsFavoriteFun();
-                      await userProvider.resetFavoriteData();
+                      userProvider.resetFavoriteData();
                       await userProvider.loadUserFavoriteGoodsListFun(1);
                     },
                     child: Container(

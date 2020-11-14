@@ -390,7 +390,7 @@ class _GoodsListPageState extends State<GoodsListPage>
       refreshWiget = info.refreshWiget;
     }
 
-    Widget child = null;
+    Widget child;
     if (mode == RefreshIndicatorMode.error) {
       child = GestureDetector(
           onTap: () {

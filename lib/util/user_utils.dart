@@ -19,12 +19,12 @@ class UserUtil{
     return userData.user;
   }
 
-  static void setUserInfo(String json) async {
+  static Future<void> setUserInfo(String json) async {
     SharedPreferences _refs = await refs;
     _refs.setString("userInfo", json);
   }
 
-  static void removeUserInfoData() async {
+  static Future<void> removeUserInfoData() async {
     SharedPreferences _refs = await refs;
     _refs.remove("userInfo");
   }
